@@ -1,0 +1,39 @@
+﻿@model StudentDbManagement.Models.Student
+@{
+    ViewBag.Title = "AddNewStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Add New Student</h2>
+
+<form action="AddNewStudent" method="post">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(model => model.firstName, "First Name")
+        @Html.TextBox("firstName", null, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.lastName, "Last Name")
+        @Html.TextBox("lastName", null, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="pwd">Address:</label>
+        <input type="text" class="form-control" id="address" name="address" value="@Model.address">
+        @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.dateOfBirth, "dateOfBirth")
+        <input type="date" value="@Model.dateOfBirth" id="dateOfBirth" name="dateOfBirth" class="form-control"/>
+        @*@Html.TextBox("dateOfBirth", null, new { @class="form-control"})*@
+        @Html.ValidationMessageFor(model => model.dateOfBirth, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-success">@TempData["message"]</div>
+}
